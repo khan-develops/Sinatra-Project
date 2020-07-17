@@ -12,6 +12,12 @@ class ApplicationController < Sinatra::Base
         erb :index
     end
 
+    get '/login' do
+        @user = User.find(params[:id])
+        redirect 'exercies/index'
+    end
+
+
 
     get '/signup' do
         if Helpers.is_logged_in?(session)
@@ -22,7 +28,9 @@ class ApplicationController < Sinatra::Base
     end
 
     post '/signup' do
-        raise params.inspect
+        @user = User.create(username: params[:username], name: params[:name], password: params[:password])
+        session[:user_id] = @user.id
+        redirect '/exercises'
     end
 
 

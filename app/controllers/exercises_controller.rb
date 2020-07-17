@@ -4,4 +4,5 @@ class ExercisesController < ApplicationController
         @exercises = Exercise.all
         erb :'/exercises/index'
     end
+
 end
