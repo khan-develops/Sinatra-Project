@@ -9,6 +9,23 @@ class ApplicationController < Sinatra::Base
     end
 
     get '/' do
-        erb :home
+        erb :index
     end
+
+
+    get '/signup' do
+        if Helpers.is_logged_in?(session)
+            redirect '/'
+        else
+            erb :signup
+        end
+    end
+
+    post '/signup' do
+        raise params.inspect
+    end
+
+
+
+
 end
