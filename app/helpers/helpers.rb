@@ -4,6 +4,6 @@ class Helpers
     end
 
     def self.current_user(session)
-        @user = User.find(session[:id])
+        @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
 end
