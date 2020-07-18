@@ -1,9 +1,23 @@
-<h1>Hi</h1>
+<h3>If you wish to add new exercise click <a href="/exercises/new">here</a></h3>
 
 <form action='/trainings' method='POST'>
-    <div><label id='exercise_name'>Excercise Name </label></div>
-    <div><input type='text' id='exercise_name' name='exercise_name' ></div>
+    <h3>Choose your training exercise(s)</h3>
+    <input type='hidden' id='user_id' name='training[user_id]' value='<%= Helpers.current_user(session).id %>'>
+    <% @exercises.each do |exercise| %>
+        <input type='checkbox' name='training[exercise_ids][]' id='<%= exercise.id%>' value='<%= exercise.id %>'><%= exercise.name %><br>
+    <% end %>
+    </div><br>
+    <div>
 
-    <div><input type='submit' id='submit' value='Create your new exercise'></div>
+    <h3>Choose your training day</h3>
+    <select name="training[day_id]">
+        <% @days.each do |day| %>
+            <option value="<%= day.id %>"><%= day.name %></option>
+        <% end %>
+    </select>
+    </div><br>
+
+    <div><input type='submit' id='submit' value='Create'></div>
+
 </form>
 
