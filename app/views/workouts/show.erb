@@ -1,9 +1,9 @@
 <h3>Workout Name: <%= @workout.name %></h3>
 <h3>Workout Day: <%= @workout.day.name %></h3>
 
-<form method="post" action="/tweets/<%= @workout.slug %>/delete">
+<form method="post" action="/workouts/<%= @workout.slug %>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete Workout">
 </form>
 
-<a href="/workouts/<%= @workout.slug %>/edit">Edit Tweet </a>
+<a href="/workouts/<%= @workout.slug %>/edit">Edit Workout Session </a>

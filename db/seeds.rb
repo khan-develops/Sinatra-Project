@@ -3,7 +3,7 @@ DATA = {:day_keys => ['name'],
     :user_keys => ['username', 'name', 'password'],
         :users => [['batsaikhan84', 'Batsaikhan Ulambayar', 'password'], ['sugarmaa89', 'Sugarmaa Dorjdagva', 'password']],
     :exercise_keys => ['name', 'calorie', 'note'],
-        :exercises => [['Burpee', 300, 'exercise duration is 10 min'], ['Plank', 300, 'exercise duration is 10 min']]
+        :exercises => [['Burpee', 300, 'exercise duration is 10 min'], ['Plank', 300, 'exercise duration is 10 min'], ['Squat', 400, 'exercise set 3 reps 10']]
 }
 
 def main

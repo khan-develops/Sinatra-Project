@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class WorkoutsController < ApplicationController
+    use Rack::Flash
 
     get '/workouts' do
         @workouts = Workout.all
@@ -9,6 +12,7 @@ class WorkoutsController < ApplicationController
         if Helpers.is_logged_in?(session)
             erb :'/workouts/new'
         else
+            flash[:message] = "Please log in before create new workout session."
             redirect '/login'
         end
     end
@@ -19,9 +23,11 @@ class WorkoutsController < ApplicationController
             if @workout && @workout.user == Helpers.current_user(session)
                 erb :'/workouts/edit'
             else
+                flash[:message] = "Only current users can edit their own workout sessions."
                 redirect '/workouts'
             end
         else
+            flash[:message] = "Please log in in orderto edit your workout session."
             redirect '/login'
         end
     end
@@ -34,15 +40,14 @@ class WorkoutsController < ApplicationController
     post '/workouts' do
         if Helpers.is_logged_in?(session)
             @workout = Workout.create(params[:workout])
-            if !params[:exercise][:name] == "" && !params[:exercise][:calorie] == "" && !params[:exercise][:note] == ""
+            if !params[:exercise][:name] == "" || !params[:exercise][:calorie] == "" || !params[:exercise][:note] == ""
                 @workout.exercises << Exercise.create(params[:exercise])
-                redirect "/users/#{Helpers.current_user(session).slug}"
-            else
-                redirect '/workouts/new'
             end
         else
+            flash[:message] = "Please log in in order to edit your workout session."
             redirect '/login'
         end
+        redirect "/users/#{Helpers.current_user(session).slug}"
     end
 
     patch '/workouts/:id' do
@@ -51,17 +56,20 @@ class WorkoutsController < ApplicationController
         redirect "/workouts/#{@workout.slug}"
     end
 
-    delete 'workouts/:id' do
+    delete '/workouts/:slug/delete' do
         if Helpers.is_logged_in?(session)
             @workout = Workout.find_by_slug(params[:slug])
             if @workout && @workout.user == Helpers.current_user(session)
                 @workout.delete
             else
+                flash[:message] = "You need to be current user in order to delete any workout session."
                 redirect '/workouts'
             end
         else
+            flash[:message] = "Please log in in order to delete your workout session."
             redirect '/login'
         end
+        redirect "/users/#{Helpers.current_user(session).slug}"
         
     end
 
