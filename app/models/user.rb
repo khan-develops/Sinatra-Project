@@ -1,8 +1,15 @@
+
+
 class User < ActiveRecord::Base
-    has_secure_password
 
-    has_many :trainings
-    has_many :exercises, through: :trainings
-    has_many :days, through: :trainings
+  include Slugifiable::InstanceMethods
+  extend Slugifiable::ClassMethods
 
+  has_secure_password
+
+  has_many :workouts
+  has_many :days, through: :workouts
+
+
+  
   end

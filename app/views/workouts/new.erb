@@ -1,7 +1,12 @@
-<h2>Create your exercise here</h2>
+<h2>Create Your Workout Session</h2>
 
-<form action='/exercises' method='POST'>
+<form action='/workouts' method='POST'>
+    
 
+    <div><label for='workout_name'>Name your workout session: </label>
+    <input type='text' id='workout_name' name='workout[name]' ></div><br>
+
+    <h3>Create your training exercise</h3>
     <div><label for='exercise_name'>Excercise Name: </label>
     <input type='text' id='exercise_name' name='exercise[name]' ></div><br>
     <div><label for='calorie'>Calories: </label>
@@ -10,17 +15,18 @@
     <input type='text' id='note' name='exercise[note]' ></div><br>
     <div>
 
+    <input type='hidden' id='user_id' name='workout[user_id]' value='<%= Helpers.current_user(session).id %>'>
+
     <h3>Choose your training exercise(s)</h3>
-    <input type='hidden' id='user_id' name='user_exercise_day[user_id][]' value='<%= Helpers.current_user(session).id %>'>
-    <% @exercises.each do |exercise| %>
-        <input type='checkbox' name='user_exercise_day[exercise_ids][]' id='<%= exercise.id%>' value='<%= exercise.id %>'><%= exercise.name %><br>
+    <% Exercise.all.each do |exercise| %>
+        <input type='checkbox' name='workout[exercise_ids][]' id='<%= exercise.id%>' value='<%= exercise.id %>'><%= exercise.name %><br>
     <% end %>
     </div><br>
     <div>
 
     <h3>Choose your training day</h3>
-    <select name="user_exercise_day[day_id][]">
-        <% @days.each do |day| %>
+    <select name="workout[day_id]">
+        <% Day.all.each do |day| %>
             <option value="<%= day.id %>"><%= day.name %></option>
         <% end %>
     </select>

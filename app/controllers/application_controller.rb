@@ -9,7 +9,11 @@ class ApplicationController < Sinatra::Base
     end
 
     get '/' do
-        erb :index
+        if Helpers.current_user(session)
+            redirect "/users/#{Helpers.current_user(session).id}"
+        else
+            erb :index
+        end
     end
 
     get '/login' do
@@ -39,7 +43,7 @@ class ApplicationController < Sinatra::Base
     end
 
     post '/signup' do
-        if params[:username] == "" || params[:name] == "" || params[:password] == ""
+        if params[:username] == "" || params[:name] == "" || params[:password] == "" || User.find_by(username: params[:username])
             redirect '/signup'
         else
             @user = User.create(username: params[:username], name: params[:name], password: params[:password])
