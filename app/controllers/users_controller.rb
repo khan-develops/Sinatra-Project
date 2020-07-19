@@ -5,8 +5,8 @@ class UsersController < ApplicationController
         erb :'/users/index'
     end
 
-    get '/users/:id' do
-        @user = User.find_by(id: params[:id])
+    get '/users/:slug' do
+        @user = User.find_by_slug(params[:slug])
         erb :'/users/show'
     end
 

@@ -1,1 +1,12 @@
-<%= Helpers.current_user(session).name %>
+<h3>All the users</h3>
+<ul>
+<% User.all.each do |user|%>
+    <li>
+        <% if user.name == Helpers.current_user(session).name %>
+            <h4><%= user.name %>. You are a current user. Click <a href="/users/<%= Helpers.current_user(session).slug %>">here</a> to see your workout sessions. </h4>
+        <% else %>
+            <h4><%= user.name %>
+        <% end %>
+    </li>
+    <% end %>
+<ul>

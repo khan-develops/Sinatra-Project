@@ -1,7 +1,7 @@
 <h2><%= @user.name %></h2>
 <h3>Your list of workout sessions:</h3>
 <% @user.workouts.each do |workout| %>
-    <%= workout.name %>
+    <h2><a href="/workouts/<%= workout.slug %>"><%= workout.name %></h2>
     <% end %>
 
 <h3>Clik <a href='/workouts/new'>here</a> to create new workout session.<h3>

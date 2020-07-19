@@ -1,5 +1,3 @@
-
-
 class User < ActiveRecord::Base
 
   include Slugifiable::InstanceMethods
@@ -10,6 +8,4 @@ class User < ActiveRecord::Base
   has_many :workouts
   has_many :days, through: :workouts
 
-
-  
-  end
+end
