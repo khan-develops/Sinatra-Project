@@ -1,4 +1,10 @@
 <h3>Workout Name: <%= @workout.name %></h3>
+<h3>Workout Exercises: 
+<ul>
+<% @workout.exercises.each do |exercise| %>
+  <li><%= exercise.name %></li>
+  <% end %></h3>
+  </ul>
 <h3>Workout Day: <%= @workout.day.name %></h3>
 
 <form method="post" action="/workouts/<%= @workout.slug %>/delete">

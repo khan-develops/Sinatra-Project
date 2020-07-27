@@ -1,6 +1,7 @@
 <h2>Edit Your Workout Session</h2>
 
 <form action='/workouts/<%= @workout.slug %>' method='POST'>
+    <input type="hidden" name="_method" value="PATCH">
     
 
     <div><label for='workout_name'>Name your workout session: </label>

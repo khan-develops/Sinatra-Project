@@ -17,21 +17,6 @@ class WorkoutsController < ApplicationController
         end
     end
 
-    get '/workouts/:slug/edit' do
-        if Helpers.is_logged_in?(session)
-            @workout = Workout.find_by_slug(params[:slug])
-            if @workout && @workout.user == Helpers.current_user(session)
-                erb :'/workouts/edit'
-            else
-                flash[:message] = "Only current users can edit their own workout sessions."
-                redirect '/workouts'
-            end
-        else
-            flash[:message] = "Please log in in orderto edit your workout session."
-            redirect '/login'
-        end
-    end
-
     get '/workouts/:slug' do
         @workout = Workout.find_by_slug(params[:slug])
         erb :'/workouts/show'
@@ -50,8 +35,24 @@ class WorkoutsController < ApplicationController
         redirect "/users/#{Helpers.current_user(session).slug}"
     end
 
-    patch '/workouts/:id' do
-        @workout = Workout.find_by_id(params[:id])
+    get '/workouts/:slug/edit' do
+        if Helpers.is_logged_in?(session)
+            @workout = Workout.find_by_slug(params[:slug])
+            if @workout && @workout.user == Helpers.current_user(session)
+                erb :'/workouts/edit'
+            else
+                flash[:message] = "Only current users can edit their own workout sessions."
+                redirect '/workouts'
+            end
+        else
+            flash[:message] = "Please log in in orderto edit your workout session."
+            redirect '/login'
+        end
+    end
+
+    patch '/workouts/:slug' do
+        #binding.pry
+        @workout = Workout.find_by_slug(params[:slug])
         @workout.update(params[:workout])
         redirect "/workouts/#{@workout.slug}"
     end
