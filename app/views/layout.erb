@@ -1,17 +1,38 @@
-<h1><a href="/">Home Page</a><<<<<<<<<<<<>>>>>>>>>>>>>>>
-                           
-<% if Helpers.current_user(session) %> 
-    <a href="/logout">Log Out</a> 
-<% else %>
-<a href="/login">Log In</a>
-<% end %>
-</h1>
-
-<% flash.keys.each do |type| %>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset="UTF=8">
+  <title>Sinatra Project</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+  <div class="wrapper">
+    <nav class="navbar">
+      <img class="logo" src="/images/logo.jpg">
+      <ul>
+        <li><a class="active" href="/">Home</a></li>
+          <% if Helpers.current_user(session) %>
+          <li> 
+            <a href="/logout">Sign Out</a> 
+          </li>
+          <% else %>
+          <li>
+            <a href="/login">Sign In</a>
+          </li>
+          <li>
+            <a href="/signup">Sign Up</a>
+          </li>
+          <% end %>
+      </ul>
+    </nav>
+  </div>
+  <% flash.keys.each do |type| %>
     <div data-alert class="flash <%= type %> alert-box radius">
       <%= flash[type] %>
     </div>
   <% end %>
-<br>
-<br>
 <%= yield %>
+</body>
+</html>
+
+
