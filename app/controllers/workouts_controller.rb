@@ -24,9 +24,14 @@ class WorkoutsController < ApplicationController
 
     post '/workouts' do
         if Helpers.is_logged_in?(session)
-            @workout = Workout.create(params[:workout])
-            if !params[:exercise][:name] == "" || !params[:exercise][:calorie] == "" || !params[:exercise][:note] == ""
-                @workout.exercises << Exercise.create(params[:exercise])
+            if !params[:workout][:name].empty?
+                @workout = Workout.create(params[:workout])
+                if !params[:exercise][:name].empty? || !params[:exercise][:calorie].empty? || !params[:exercise][:note].empty?
+                    @workout.exercises << Exercise.create(params[:exercise])
+                end
+            else
+                flash[:message] = "Workout name cannot be blank"
+                redirect '/workouts/new'
             end
         else
             flash[:message] = "Please log in in order to edit your workout session."

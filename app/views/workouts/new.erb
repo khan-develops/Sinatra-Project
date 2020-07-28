@@ -21,8 +21,7 @@
 
             <h1>Choose your training exercise(s)</h1>
             <% Exercise.all.each do |exercise| %>
-                <label><%= exercise.name %><input type='checkbox' name='workout[exercise_ids][]' id='<%= exercise.id%>' value='<%= exercise.id %>'><span></span>
-                </label>
+                <%= exercise.name %><input type='checkbox' name='workout[exercise_ids][]' id='<%= exercise.id%>' value='<%= exercise.id %>'>
             <% end %>
 
             <h1>Choose your training day</h1>

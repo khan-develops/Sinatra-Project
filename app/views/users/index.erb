@@ -11,10 +11,14 @@
         <ul>
         <% User.all.each do |user|%>
             <li>
-                <% if user.name == Helpers.current_user(session).name %>
-                    <h1><%= user.name %>. You are a current user. Click <a href="/users/<%= Helpers.current_user(session).slug %>">here</a> to see your workout sessions. </h1>
+                <% if !Helpers.current_user(session).nil? %>
+                    <% if user.name == Helpers.current_user(session).name %>
+                        <h1><%= user.name %>. You are a current user. Click <a href="/users/<%= Helpers.current_user(session).slug %>">here</a> to see your workout sessions. </h1>
+                        <% else %>
+                        <h1><%= user.name %></h1>
+                    <% end %>
                 <% else %>
-                    <h1><%= user.name %>
+                    <h1><%= user.name %></h1>
                 <% end %>
             </li>
             <% end %>
