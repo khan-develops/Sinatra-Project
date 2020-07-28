@@ -1,11 +1,24 @@
-<h2>List of workouts</h2>
-<ul>
-<% @workouts.each do |workout| %>
-    <li>
-    <h3><a href="/workouts/<%= workout.slug %>"><%= workout.name %></a></h3>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset="UTF=8">
+  <title>Sinatra Project</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+    <div class="common">
+    <% if @workouts.empty? %>
+        <h1>There are no workout sessions created.</h1>
+    <% else %>
+        <h1>List of workouts</h1>
+        <ul>
+            <% @workouts.each do |workout| %>
+                <li>
+                    <a href="/workouts/<%= workout.slug %>"><%= workout.name %></a>
+                </li>
+            <% end %>  
+        <ul>
     <% end %>
-    </li>
-<ul>
-
-
-
+    </div>
+</body>
+</html>

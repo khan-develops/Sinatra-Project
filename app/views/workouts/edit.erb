@@ -1,29 +1,38 @@
-<h2>Edit Your Workout Session</h2>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset="UTF=8">
+  <title>Sinatra Project</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+    <div class="custom-form">
+            <h1>Edit Your Workout Session</h1>
 
-<form action='/workouts/<%= @workout.slug %>' method='POST'>
-    <input type="hidden" name="_method" value="PATCH">
+            <form action='/workouts/<%= @workout.slug %>' method='POST'>
+                <input type="hidden" name="_method" value="PATCH">
+                
+                <input type='text' class="text-input" id='workout_name' name='workout[name]' value='<%= @workout.name %>'>
+            
+                <h1>Choose your training exercise(s)</h1>
+                <% Exercise.all.each do |exercise| %>
+                    <label><%= exercise.name %></label>
+                    <input type='checkbox' name='workout[exercise_ids][]' id='<%= exercise.id%>' value='<%= exercise.id %>' <%='checked' if @workout.exercises.include?(exercise) %>><br>
+                <% end %>
+            
+                <h1>Choose your training day</h1>
+                <select name="workout[day_id]">
+                    <% Day.all.each do |day| %>
+                        <option value="<%= day.id %>"><%= day.name %></option>
+                    <% end %>
+                </select>
+            
+                <div><input type='submit' class="buttons" id='submit' value='Edit'></div>
+            
+            </form>
     
-
-    <div><label for='workout_name'>Name your workout session: </label>
-    <input type='text' id='workout_name' name='workout[name]' value='<%= @workout.name %>'></div><br>
-
-    <h3>Choose your training exercise(s)</h3>
-    <% Exercise.all.each do |exercise| %>
-        <label><%= exercise.name %></label>
-        <input type='checkbox' name='workout[exercise_ids][]' id='<%= exercise.id%>' value='<%= exercise.id %>' <%='checked' if @workout.exercises.include?(exercise) %>><br>
-    <% end %>
-    </div><br>
-    <div>
-
-    <h3>Choose your training day</h3>
-    <select name="workout[day_id]">
-        <% Day.all.each do |day| %>
-            <option value="<%= day.id %>"><%= day.name %></option>
-        <% end %>
-    </select>
-    </div><br>
-
-    <div><input type='submit' id='submit' value='Edit'></div>
-
-</form>
+    
+    </div>
+</body>
+</html>
 

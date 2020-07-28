@@ -1,10 +1,25 @@
-<form method='POST' action='/signup'>
-    <div><label for='username'>Username:</label>
-    <input type=text id='username' name='username' ></div><br>
-    <div><label for='name'>Your name:</label>
-    <input type=text id='name' name='name' ></div><br>
-    <div><label for='password'>Password:</label>
-    <input type=text id='password' name='password' ></div><br>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset="UTF=8">
+  <title>Sinatra Project</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+    <div class="custom-form">
+        <form method='POST' action='/signup'>
+            <input type=text class="text-input" id='username' name='username' placeholder="Username">
+            <input type=text class="text-input" id='name' name='name' placeholder="Name">
+            <input type=text class="text-input" id='password' name='password' placeholder="Password">
 
-    <div><input type='submit' id='submit' value='Sign Up'></div>
-</form>
+            <input type='submit' class="buttons" id='submit' value='Sign Up'>
+        </form>
+    </div>
+</body>
+</html>
+
+
+
+
+
+

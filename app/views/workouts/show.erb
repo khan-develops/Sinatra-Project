@@ -1,15 +1,29 @@
-<h3>Workout Name: <%= @workout.name %></h3>
-<h3>Workout Exercises: 
-<ul>
-<% @workout.exercises.each do |exercise| %>
-  <li><%= exercise.name %></li>
-  <% end %></h3>
-  </ul>
-<h3>Workout Day: <%= @workout.day.name %></h3>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset="UTF=8">
+  <title>Sinatra Project</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+    <div class="common">
+      <h1>Workout Name: <%= @workout.name %></h1>
+      <h1>Workout Exercises: 
+        <ul>
+        <% @workout.exercises.each do |exercise| %>
+          <li><%= exercise.name %></li>
+          <% end %></h1>
+          </ul>
+      <h1>Workout Day: <%= @workout.day.name %></h1>
+      
+      <form method="post" action="/workouts/<%= @workout.slug %>/delete">
+        <input id="hidden" type="hidden" name="_method" value="DELETE">
+        <input type="submit" class="button" value="Delete Workout">
+      </form>
+      
+      <a href="/workouts/<%= @workout.slug %>/edit">Edit Workout Session </a>
+    </div>
+</body>
+</html>
 
-<form method="post" action="/workouts/<%= @workout.slug %>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete Workout">
-</form>
 
-<a href="/workouts/<%= @workout.slug %>/edit">Edit Workout Session </a>

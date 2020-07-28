@@ -1,9 +1,22 @@
-<h2><%= @user.name %></h2>
-<h3>Your list of workout sessions:</h3>
-<% @user.workouts.each do |workout| %>
-    <h2><a href="/workouts/<%= workout.slug %>"><%= workout.name %></h2>
-    <% end %>
-
-<h3>Click <a href='/workouts/new'>here</a> to create new workout session.</h3>
-
-<h3><a href="/logout">Log Out</a></h3>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset="UTF=8">
+  <title>Sinatra Project</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+    <div class="common">
+        <h1>Your list of workout sessions:</h1>
+        <% if @user.workouts.empty?%>
+            <h1>Currently, you do not have any workout created</h1>
+        <% else %>
+            <% @user.workouts.each do |workout| %>
+                <h1><a href="/workouts/<%= workout.slug %>"><%= workout.name %></h1>
+            <% end %>
+        <% end %>
+        
+        <h1>Click <a href='/workouts/new'>here</a> to create new workout session.</h1>
+    </div>
+</body>
+</html>

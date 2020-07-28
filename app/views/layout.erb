@@ -15,6 +15,9 @@
           <li> 
             <a href="/logout">Sign Out</a> 
           </li>
+          <li>
+            <div class="current-user"><%= Helpers.current_user(session).name %></div>
+          </li>
           <% else %>
           <li>
             <a href="/login">Sign In</a>
@@ -25,12 +28,15 @@
           <% end %>
       </ul>
     </nav>
+    <% if flash[:message] %>
+      <div class="message">
+        <div class="flash-text">
+          <%= flash[:message] %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <% flash.keys.each do |type| %>
-    <div data-alert class="flash <%= type %> alert-box radius">
-      <%= flash[type] %>
-    </div>
-  <% end %>
+
 <%= yield %>
 </body>
 </html>
